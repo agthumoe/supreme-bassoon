@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  redis:
+    image: docker.io/redis:latest
+    ports:
+      - 6379:6379
+    restart: always
+
+  db:
+    image: docker.io/postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mydb
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
