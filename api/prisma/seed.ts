@@ -34,6 +34,30 @@ async function main() {
     });
   });
 
+  _.times(3, async (i) => {
+    await prisma.mailProvider.upsert({
+      where: { id: i },
+      update: {
+        name: faker.company.name(),
+        port: faker.datatype.number(1000),
+        host: faker.internet.ipv4(),
+        username: faker.internet.email(),
+        password: faker.random.alphaNumeric(8),
+        secure: true,
+        searchIndex: i
+      },
+      create: {
+        name: faker.company.name(),
+        port: faker.datatype.number(1000),
+        host: faker.internet.ipv4(),
+        username: faker.internet.email(),
+        password: faker.random.alphaNumeric(8),
+        secure: true,
+        searchIndex: i
+      }
+    });
+  });
+
   console.log(admin);
 }
 
