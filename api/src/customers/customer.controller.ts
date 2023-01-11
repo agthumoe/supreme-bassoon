@@ -24,6 +24,7 @@ import {
   LoggerService,
   Res,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { CreateCustomerDto } from './dto/create-customer.dto';
@@ -32,16 +33,18 @@ import { Response } from 'express';
 import PaginatedResponse from 'src/common/dtos/paginated-response.dto';
 import { CustomerService } from './customer.service';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('customers')
 @ApiTags('customers')
 @ApiBearerAuth('jwt')
+@UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 export class CustomerController {
   constructor(
     private readonly customerService: CustomerService,
     @Inject(Logger) private readonly logger: LoggerService,
-  ) {}
+  ) { }
 
   @Post()
   @ApiCreatedResponse({ type: CustomerEntity })

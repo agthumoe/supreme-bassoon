@@ -24,6 +24,7 @@ import {
   LoggerService,
   Res,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Response } from 'express';
@@ -32,10 +33,12 @@ import { CreateMailProviderDto } from './dto/create-mail-provider.dto';
 import { MailProviderEntity } from './mail-provider.entity';
 import { MailProviderService } from './mail-provider.service';
 import { UpdateMailProviderDto } from './dto/update-mail-provider.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('providers')
 @ApiTags('providers')
 @ApiBearerAuth('jwt')
+@UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 export class MailProviderController {
   constructor(

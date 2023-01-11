@@ -8,6 +8,7 @@ import { BullModule } from '@nestjs/bull';
 import { UserModule } from './users/user.module';
 import { CustomerModule } from './customers/customer.module';
 import { MailProviderModule } from './mailProviders/mail-provider.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { MailProviderModule } from './mailProviders/mail-provider.module';
       },
     }),
 
+    AuthModule,
     CustomerModule,
     MailProviderModule,
     UserModule,

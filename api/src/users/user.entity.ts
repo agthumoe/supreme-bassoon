@@ -9,6 +9,11 @@ export class UserEntity extends MutableEntity implements User {
   })
   email: string;
 
+  @ApiProperty({
+    description: 'Unique username of a user',
+  })
+  username: string;
+
   @Exclude()
   @ApiProperty({ description: 'Password to be hashed' })
   password: string;
