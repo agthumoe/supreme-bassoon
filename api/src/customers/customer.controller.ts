@@ -41,12 +41,12 @@ export class CustomerController {
   constructor(
     private readonly customerService: CustomerService,
     @Inject(Logger) private readonly logger: LoggerService,
-  ) { }
+  ) {}
 
   @Post()
   @ApiCreatedResponse({ type: CustomerEntity })
-  async create(@Body() CreateCustomerDto: CreateCustomerDto): Promise<CustomerEntity> {
-    const customer = await this.customerService.create(CreateCustomerDto);
+  async create(@Body() dto: CreateCustomerDto): Promise<CustomerEntity> {
+    const customer = await this.customerService.create(dto);
     this.logger.debug(`A new customer is created: ${customer.email}`);
     return new CustomerEntity(customer);
   }
@@ -66,13 +66,15 @@ export class CustomerController {
       skip,
       take,
       filter,
-      orderBy
+      orderBy,
     });
   }
 
   @Get(':id')
   @ApiOkResponse({ type: CustomerEntity })
-  async findOne(@Param('id', ParseIntPipe) id: number): Promise<CustomerEntity> {
+  async findOne(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<CustomerEntity> {
     const customer = await this.customerService.findOne(id);
     return customer ? new CustomerEntity(customer) : null;
   }

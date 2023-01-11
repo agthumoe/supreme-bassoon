@@ -24,7 +24,7 @@ export class CreateUserDto {
   @IsString()
   @ApiProperty({
     description: 'Name of a user',
-    example: 'alice'
+    example: 'alice',
   })
   name?: string;
 }

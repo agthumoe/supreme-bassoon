@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Customer } from '@prisma/client';
-import { Exclude } from 'class-transformer';
 import { MutableEntity } from 'src/common/entities/mutable.entity';
 
 export class CustomerEntity extends MutableEntity implements Customer {
@@ -9,7 +8,11 @@ export class CustomerEntity extends MutableEntity implements Customer {
   })
   email: string;
 
-  @ApiProperty({ description: 'Full name of a customer', required: false, nullable: true })
+  @ApiProperty({
+    description: 'Full name of a customer',
+    required: false,
+    nullable: true,
+  })
   name: string | null;
 
   constructor(partial: Partial<CustomerEntity>) {

@@ -52,13 +52,17 @@ model Mail {
 }
 
 model MailProvider {
-  id       Int     @id @default(autoincrement())
-  name     String  @db.VarChar(256)
-  host     String  @db.VarChar(256)
-  port     Int     @default(465) @db.Integer
-  secure   Boolean @default(true) @db.Boolean
-  username String  @db.VarChar(256)
-  password String  @db.VarChar(256)
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(256)
+  host      String   @db.VarChar(256)
+  port      Int      @default(465) @db.Integer
+  secure    Boolean  @default(true) @db.Boolean
+  username  String   @db.VarChar(256)
+  password  String   @db.VarChar(256)
+  createdBy String?  @map("created_by") @db.VarChar(256)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedBy String?  @map("updated_by") @db.VarChar(256)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz()
 
   @@index([name])
   @@map("mail_providers")

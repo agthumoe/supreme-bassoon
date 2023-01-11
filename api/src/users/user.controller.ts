@@ -41,7 +41,7 @@ export class UserController {
   constructor(
     private readonly userService: UserService,
     @Inject(Logger) private readonly logger: LoggerService,
-  ) { }
+  ) {}
 
   @Post()
   @ApiCreatedResponse({ type: UserEntity })

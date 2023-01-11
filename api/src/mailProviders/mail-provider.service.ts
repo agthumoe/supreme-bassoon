@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Customer, Prisma } from '@prisma/client';
+import { MailProvider, Prisma } from '@prisma/client';
 import PaginatedResponse from 'src/common/dtos/paginated-response.dto';
 import { PrismaService } from '../common/prisma/prisma.service';
-import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { UpdateMailProviderDto } from './dto/update-mail-provider.dto';
 
 @Injectable()
-export class CustomerService {
+export class MailProviderService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: Prisma.CustomerCreateInput): Promise<Customer> {
-    return this.prisma.customer.create({
+  async create(data: Prisma.MailProviderCreateInput): Promise<MailProvider> {
+    return this.prisma.mailProvider.create({
       data,
     });
   }
@@ -18,11 +18,11 @@ export class CustomerService {
     skip?: number;
     take?: number;
     filter?: string;
-    orderBy?: Prisma.CustomerOrderByWithRelationInput;
+    orderBy?: Prisma.MailProviderOrderByWithRelationInput;
     select?: any;
-  }): Promise<PaginatedResponse<Customer>> {
+  }): Promise<PaginatedResponse<MailProvider>> {
     const { filter, ...pagination } = params;
-    let where: Prisma.CustomerWhereInput;
+    let where: Prisma.MailProviderWhereInput;
     if (filter) {
       where = {
         OR: [
@@ -32,20 +32,14 @@ export class CustomerService {
               mode: 'insensitive',
             },
           },
-          {
-            email: {
-              contains: filter,
-              mode: 'insensitive',
-            },
-          },
         ],
       };
     }
-    const data = await this.prisma.customer.findMany({
+    const data = await this.prisma.mailProvider.findMany({
       ...pagination,
       where,
     });
-    const total = await this.prisma.customer.count({
+    const total = await this.prisma.mailProvider.count({
       where,
     });
     return {
@@ -58,21 +52,21 @@ export class CustomerService {
     };
   }
 
-  async findOne(id: number): Promise<Customer | null> {
-    return this.prisma.customer.findUniqueOrThrow({
+  async findOne(id: number): Promise<MailProvider | null> {
+    return this.prisma.mailProvider.findUniqueOrThrow({
       where: { id },
     });
   }
 
-  async update(id: number, data: UpdateCustomerDto): Promise<Customer> {
-    return this.prisma.customer.update({
+  async update(id: number, data: UpdateMailProviderDto): Promise<MailProvider> {
+    return this.prisma.mailProvider.update({
       where: { id },
       data,
     });
   }
 
-  async remove(id: number): Promise<Customer> {
-    return this.prisma.customer.delete({
+  async remove(id: number): Promise<MailProvider> {
+    return this.prisma.mailProvider.delete({
       where: { id },
     });
   }

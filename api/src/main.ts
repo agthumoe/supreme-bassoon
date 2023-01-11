@@ -13,14 +13,14 @@ async function bootstrap() {
 
   /**
    * Enable cors to allow resources to be requested from another domain.
-   * 
+   *
    * Read: https://docs.nestjs.com/security/cors#cors
    */
   app.enableCors();
 
   /**
    * To protect against various well-known web vulnerabilities.
-   * 
+   *
    * Read: https://docs.nestjs.com/security/helmet#helmet
    */
   app.use(helmet());
@@ -65,9 +65,9 @@ async function bootstrap() {
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
 
-  /** 
+  /**
    * Initialize Swagger using `SwaggerModule` class
-   * 
+   *
    * Read: https://docs.nestjs.com/openapi/introduction
    */
   const swaggerConfig = new DocumentBuilder()

@@ -7,6 +7,7 @@ import { HealthModule } from './health/health.module';
 import { BullModule } from '@nestjs/bull';
 import { UserModule } from './users/user.module';
 import { CustomerModule } from './customers/customer.module';
+import { MailProviderModule } from './mailProviders/mail-provider.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { CustomerModule } from './customers/customer.module';
     }),
 
     CustomerModule,
-    UserModule
+    MailProviderModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],
