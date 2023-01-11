@@ -14,7 +14,7 @@ export class MailService {
   constructor(
     @InjectQueue(queues.mail) private mailQueue: Queue,
     private prisma: PrismaService,
-  ) { }
+  ) {}
   async create(data: CreateMailDto): Promise<void> {
     const input = { ...data } as Prisma.MailCreateInput;
     input.mailUuid = uuid();
@@ -22,12 +22,17 @@ export class MailService {
     input.retriedCount = 1;
     // get the provider
     const providers = await this.prisma.mailProvider.findMany({
+      skip: 0,
+      take: 3,
       orderBy: {
         searchIndex: 'desc',
       },
     });
     // add in the queue for further processing.
-    this.mailQueue.add({ data: input, providers } as QueueMailDto);
+    this.mailQueue.add({ data: input, providers } as QueueMailDto, {
+      attempts: 3,
+      backoff: 500,
+    });
   }
 
   async findAll(params: {

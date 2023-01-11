@@ -17,7 +17,13 @@ import {
 } from '@nestjs/common';
 import { MailService } from './mail.service';
 import { CreateMailDto } from './dto/create-mail.dto';
-import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { MailEntity } from './mail.entity';
 import { Prisma } from '@prisma/client';
@@ -36,11 +42,11 @@ export class MailController {
 
   @Post()
   @ApiCreatedResponse({ type: MailEntity })
-  async create(
-    @Body() dto: CreateMailDto,
-  ) {
+  async create(@Body() dto: CreateMailDto) {
     await this.mailService.create(dto);
-    this.logger.debug(`A new mail is in queue: ${dto.subject}, to: ${dto.toEmail}`);
+    this.logger.debug(
+      `A new mail is in queue: ${dto.subject}, to: ${dto.toEmail}`,
+    );
     return { message: 'Mail is in queue now', status: HttpStatus.CREATED };
   }
 
@@ -65,9 +71,7 @@ export class MailController {
 
   @Get(':id')
   @ApiOkResponse({ type: MailEntity })
-  async findOne(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<MailEntity> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<MailEntity> {
     const mail = await this.mailService.findOne(id);
     return mail ? new MailEntity(mail) : null;
   }

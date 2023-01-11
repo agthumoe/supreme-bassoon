@@ -44,7 +44,7 @@ export class MailProviderController {
   constructor(
     private readonly mailProviderService: MailProviderService,
     @Inject(Logger) private readonly logger: LoggerService,
-  ) { }
+  ) {}
 
   @Post()
   @ApiCreatedResponse({ type: MailProviderEntity })

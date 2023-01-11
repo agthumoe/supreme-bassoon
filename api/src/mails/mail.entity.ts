@@ -4,6 +4,10 @@ import { ImmutableEntity } from 'src/common/entities/immutable.entity';
 
 export class MailEntity extends ImmutableEntity implements Mail {
   @ApiProperty({
+    description: 'Mail sending status', required: false, nullable: true
+  })
+  status: string | null;
+  @ApiProperty({
     description: 'Unique mail Uuid',
   })
   mailUuid: string;

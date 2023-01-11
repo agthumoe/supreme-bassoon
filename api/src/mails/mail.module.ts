@@ -15,6 +15,6 @@ import { PrismaModule } from 'src/common/prisma/prisma.module';
       name: queues.mail,
     }),
   ],
-  exports: [MailService, MailProcessor]
+  exports: [MailService, MailProcessor],
 })
-export class MailModule { }
+export class MailModule {}
