@@ -65,7 +65,7 @@ export class MailProviderController {
     @Query('skip', new DefaultValuePipe(0), ParseIntPipe) skip?: number,
     @Query('take', new DefaultValuePipe(10), ParseIntPipe) take?: number,
     @Query('filter') filter?: string,
-    @Query('orderBy') orderBy?: Prisma.CustomerOrderByWithRelationInput,
+    @Query('orderBy') orderBy?: Prisma.MailProviderOrderByWithRelationInput,
   ): Promise<PaginatedResponse<MailProviderEntity>> {
     return this.mailProviderService.findAll({
       skip,

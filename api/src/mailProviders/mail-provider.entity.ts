@@ -32,6 +32,12 @@ export class MailProviderEntity extends MutableEntity implements MailProvider {
   })
   password: string;
 
+  @ApiProperty({
+    description: 'index for ordering',
+    example: '1',
+  })
+  searchIndex: number;
+
   constructor(partial: Partial<MailProviderEntity>) {
     super(partial);
     Object.assign(this, partial);

@@ -1,12 +1,7 @@
 import type { User } from '@prisma/client';
 import { compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import {
-  Inject,
-  Injectable,
-  Logger,
-  LoggerService,
-} from '@nestjs/common';
+import { Inject, Injectable, Logger, LoggerService } from '@nestjs/common';
 import { AuthDto } from './dto/auth.dto';
 import { UserService } from '../users/user.service';
 import { UserEntity } from '../users/user.entity';
@@ -19,8 +14,8 @@ export class AuthService {
   constructor(
     @Inject(Logger) private logger: LoggerService,
     private userService: UserService,
-    private jwtService: JwtService
-  ) { }
+    private jwtService: JwtService,
+  ) {}
 
   /**
    * Retrieve a user and verify the password
@@ -75,10 +70,7 @@ export class AuthService {
     };
     return {
       accessToken: this.jwtService.sign({ email, sub }),
-      refreshToken: this.jwtService.sign(
-        { email, sub },
-        { expiresIn: '30d' },
-      ),
+      refreshToken: this.jwtService.sign({ email, sub }, { expiresIn: '30d' }),
     };
   }
 }

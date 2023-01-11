@@ -44,7 +44,7 @@ export class CustomerController {
   constructor(
     private readonly customerService: CustomerService,
     @Inject(Logger) private readonly logger: LoggerService,
-  ) { }
+  ) {}
 
   @Post()
   @ApiCreatedResponse({ type: CustomerEntity })

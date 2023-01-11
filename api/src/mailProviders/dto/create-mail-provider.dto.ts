@@ -45,4 +45,10 @@ export class CreateMailProviderDto {
     example: 'password#123',
   })
   password: string;
+  @IsNumber()
+  @ApiProperty({
+    description: 'Search index for ordering',
+    example: '0',
+  })
+  searchIndex: number;
 }

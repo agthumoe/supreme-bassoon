@@ -39,32 +39,36 @@ model Customer {
 }
 
 model Mail {
-  id        Int      @id @default(autoincrement())
-  fromName  String   @map("from_name") @db.VarChar(256)
-  fromEmail String   @map("from_email") @db.VarChar(256)
-  toName    String   @map("to_name") @db.VarChar(256)
-  toEmail   String   @map("to_email") @db.VarChar(256)
-  subject   String   @db.VarChar(256)
-  body      String   @db.Text()
-  createdBy String?  @map("created_by") @db.VarChar(256)
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  id           Int      @id @default(autoincrement())
+  mailUuid     String   @unique @default(uuid()) @map("mail_uuid") @db.Uuid()
+  retriedCount Int      @default(1) @map("retried_count") @db.Integer()
+  fromName     String   @map("from_name") @db.VarChar(256)
+  fromEmail    String   @map("from_email") @db.VarChar(256)
+  toName       String   @map("to_name") @db.VarChar(256)
+  toEmail      String   @map("to_email") @db.VarChar(256)
+  subject      String   @db.VarChar(256)
+  body         String   @db.Text()
+  createdBy    String?  @map("created_by") @db.VarChar(256)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz()
 
+  @@index([mailUuid])
   @@map("mails")
 }
 
 model MailProvider {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(256)
-  host      String   @db.VarChar(256)
-  port      Int      @default(465) @db.Integer
-  secure    Boolean  @default(true) @db.Boolean
-  username  String   @db.VarChar(256)
-  password  String   @db.VarChar(256)
-  createdBy String?  @map("created_by") @db.VarChar(256)
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
-  updatedBy String?  @map("updated_by") @db.VarChar(256)
-  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz()
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(256)
+  host        String   @db.VarChar(256)
+  port        Int      @default(465) @db.Integer
+  secure      Boolean  @default(true) @db.Boolean
+  searchIndex Int      @default(0) @map("search_index") @db.Integer()
+  username    String   @db.VarChar(256)
+  password    String   @db.VarChar(256)
+  createdBy   String?  @map("created_by") @db.VarChar(256)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedBy   String?  @map("updated_by") @db.VarChar(256)
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz()
 
-  @@index([name])
+  @@index([name, searchIndex])
   @@map("mail_providers")
 }

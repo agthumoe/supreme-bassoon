@@ -4,7 +4,6 @@ import {
   MinLength,
   IsNotEmpty,
   IsPhoneNumber,
-  IsEmail,
 } from 'class-validator';
 
 export class LoginAuthDto {
