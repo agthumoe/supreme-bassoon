@@ -29,7 +29,7 @@ import { MailEntity } from './mail.entity';
 import { Prisma } from '@prisma/client';
 import PaginatedResponse from 'src/common/dtos/paginated-response.dto';
 
-@Controller('mail')
+@Controller('mails')
 @ApiTags('mails')
 @ApiBearerAuth('jwt')
 @UseGuards(JwtAuthGuard)

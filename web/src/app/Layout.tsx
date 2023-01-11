@@ -1,4 +1,5 @@
-import { Nav } from "../components/Nav";
+import { AppShell } from "@mantine/core";
+import { Sidebar } from "../components/Sidebar";
 
 type Props = {
   children: React.ReactNode;
@@ -6,12 +7,15 @@ type Props = {
 
 export function Layout({ children }: Props) {
   return (
-    <div>
-      <header>
-        <Nav />
-      </header>
-      <main>{children}</main>
-      <footer>&copy; {new Date().getFullYear()} agthumoe</footer>
-    </div>
+    <AppShell
+      padding="md"
+      navbar={<Sidebar />}
+      // header={<Header height={60} p="xs">Welcome to Supreme Bassoon</Header>}
+      styles={(theme) => ({
+        main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
+      })}
+    >
+      {children}
+    </AppShell>
   );
 }
