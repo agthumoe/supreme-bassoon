@@ -5,6 +5,7 @@ import { PrismaModule } from './common/prisma/prisma.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { HealthModule } from './health/health.module';
 import { BullModule } from '@nestjs/bull';
+import { UsersModule } from './users/user.module';
 
 @Module({
   imports: [
@@ -16,6 +17,8 @@ import { BullModule } from '@nestjs/bull';
         port: 6379,
       },
     }),
+
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

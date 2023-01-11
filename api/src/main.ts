@@ -3,6 +3,10 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
+import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { NotFoundExceptionFilter } from './common/filters/not-found-exception.filter';
+import { PrismaService } from './common/prisma/prisma.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -47,6 +51,19 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  app.useGlobalFilters(
+    new PrismaExceptionFilter(),
+    new HttpExceptionFilter(),
+    new NotFoundExceptionFilter(),
+  );
+
+  /**
+   * To deal with Prisma listens for shutdown signals and will call
+   * `process.exit()` before the application shutdown hooks fire.
+   */
+  const prismaService = app.get(PrismaService);
+  await prismaService.enableShutdownHooks(app);
 
   /** 
    * Initialize Swagger using `SwaggerModule` class
