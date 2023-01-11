@@ -5,7 +5,8 @@ import { PrismaModule } from './common/prisma/prisma.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { HealthModule } from './health/health.module';
 import { BullModule } from '@nestjs/bull';
-import { UsersModule } from './users/user.module';
+import { UserModule } from './users/user.module';
+import { CustomerModule } from './customers/customer.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { UsersModule } from './users/user.module';
       },
     }),
 
-    UsersModule
+    CustomerModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

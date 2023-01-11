@@ -37,7 +37,7 @@ import PaginatedResponse from 'src/common/dtos/paginated-response.dto';
 @ApiTags('users')
 @ApiBearerAuth('jwt')
 @UseInterceptors(ClassSerializerInterceptor)
-export class UsersController {
+export class UserController {
   constructor(
     private readonly userService: UserService,
     @Inject(Logger) private readonly logger: LoggerService,
