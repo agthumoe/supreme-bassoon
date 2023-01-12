@@ -31,6 +31,7 @@
     "zustand": "^4.3.1"
   },
   "scripts": {
+    "prepare": "cp .env.example .env",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

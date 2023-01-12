@@ -51,3 +51,6 @@ If I have more time, I want to do the following for UI
 - I haven't checked properly about authentication and authomatic logout workflow. I'm not 100% sure if it's working now or not.
 - I do not have much time to separate reusable React components, if I have more time, I would like to review the code again and create a reusable and more modular components.
 - Again, I didn't add any testing code for this project coz of limited time, if I have time, I want to add component testing with `jest` framework and e2e testing with `playwright` framework.
+
+## How to run this project
+To understand how to run API and UI, please refer to Readme.md file inside each folder.
